@@ -2180,15 +2180,15 @@ export const getDoctorAdvic1 = async (req, res) => {
 </html>
     `;
     const browser = await puppeteer.launch({
-      args: [
-        "--disable-setuid-sandbox",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote",
-      ],
-      executablePath:
-        process.env.PUPPETEER_EXECUTABLE_PATH ||
-        "/usr/bin/google-chrome-stable",
+      // args: [
+      //   "--disable-setuid-sandbox",
+      //   "--no-sandbox",
+      //   "--single-process",
+      //   "--no-zygote",
+      // ],
+      // executablePath:
+      //   process.env.PUPPETEER_EXECUTABLE_PATH ||
+      //   "/usr/bin/google-chrome-stable",
     });
     console.log("check thei path", process.env.PUPPETEER_EXECUTABLE_PATH);
     const page = await browser.newPage();
@@ -2224,7 +2224,7 @@ export const getDoctorAdvic1 = async (req, res) => {
     try {
       const result = await new Promise((resolve, reject) => {
         const uploadStream = cloudinary.v2.uploader.upload_stream(
-          { resource_type: "raw", folder: "doctor_advices" },
+          { resource_type: "auto", folder: "doctor_advices" },
           (error, result) => {
             if (error) reject(error);
             else resolve(result);
@@ -2232,7 +2232,7 @@ export const getDoctorAdvic1 = async (req, res) => {
         );
         bufferStream.pipe(uploadStream);
       });
-
+      console.log(result.secure_url);
       return res.status(200).json({
         message: "Doctor advice generated successfully.",
         fileLink: result.secure_url,
