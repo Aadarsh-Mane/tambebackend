@@ -18,6 +18,7 @@ import mongoose from "mongoose";
 import pdf from "html-pdf";
 import dotenv from "dotenv";
 import moment from "moment";
+import cloudinary from "../../helpers/cloudinary.js";
 dotenv.config(); // Load environment variables from .env file
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -2220,34 +2221,55 @@ export const getDoctorAdvic1 = async (req, res) => {
 
     // Folder ID in Google Drive
     const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
-
-    // Upload PDF to Google Drive
     try {
-      const driveFile = await drive.files.create({
-        resource: {
-          name: `DoctorAdvice_${patientId}.pdf`,
-          parents: [folderId],
-        },
-        media: {
-          mimeType: "application/pdf",
-          body: bufferStream,
-        },
-        fields: "id, webViewLink",
+      const result = await new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.v2.uploader.upload_stream(
+          { resource_type: "raw", folder: "doctor_advices" },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
+        bufferStream.pipe(uploadStream);
       });
-
-      // Extract file's public link
-      const fileLink = driveFile.data.webViewLink;
 
       return res.status(200).json({
         message: "Doctor advice generated successfully.",
-        fileLink: fileLink,
+        fileLink: result.secure_url,
       });
     } catch (error) {
       return res.status(500).json({
-        message: "Failed to upload PDF to Google Drive",
+        message: "Failed to upload PDF to Cloudinary",
         error: error.message,
       });
     }
+    // Upload PDF to Google Drive
+    // try {
+    // const driveFile = await drive.files.create({
+    //   resource: {
+    //     name: `DoctorAdvice_${patientId}.pdf`,
+    //     parents: [folderId],
+    //   },
+    //   media: {
+    //     mimeType: "application/pdf",
+    //     body: bufferStream,
+    //   },
+    //   fields: "id, webViewLink",
+    // });
+
+    // Extract file's public link
+    //   const fileLink = driveFile.data.webViewLink;
+
+    //   return res.status(200).json({
+    //     message: "Doctor advice generated successfully.",
+    //     fileLink: fileLink,
+    //   });
+    // } catch (error) {
+    //   return res.status(500).json({
+    //     message: "Failed to upload PDF to Google Drive",
+    //     error: error.message,
+    //   });
+    // }
     // });
   } catch (error) {
     console.error("Error generating doctor advice:", error);
