@@ -1241,7 +1241,7 @@ export const generateBillForDischargedPatient = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
+    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -1664,7 +1664,7 @@ export const getDoctorAdvice = async (req, res) => {
         bufferStream.push(null);
 
         // Folder ID in Google Drive
-        const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
+        const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
 
         // Upload PDF to Google Drive
         const driveFile = await drive.files.create({
@@ -1925,7 +1925,7 @@ export const generateFinalReceipt = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
+    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -2220,7 +2220,7 @@ export const getDoctorAdvic1 = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
+    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
     try {
       const result = await new Promise((resolve, reject) => {
         const uploadStream = cloudinary.v2.uploader.upload_stream(
@@ -2599,7 +2599,7 @@ export const getDoctorSheet = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
+    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -3010,7 +3010,7 @@ export const generateOpdBill = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
+    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -3260,7 +3260,7 @@ export const generateOpdReceipt = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
+    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
@@ -3516,7 +3516,7 @@ export const generateaIpddReceipt = async (req, res) => {
     bufferStream.push(null);
 
     // Folder ID in Google Drive
-    const folderId = "1Trbtp9gwGwNF_3KNjNcfL0DHeSUp0HyV";
+    const folderId = "1NMX7WXVcSY354Eg8BtDXaPtn-attnl8f";
 
     // Upload PDF to Google Drive
     const driveFile = await drive.files.create({
